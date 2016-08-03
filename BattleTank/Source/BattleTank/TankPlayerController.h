@@ -25,7 +25,11 @@ private:
 	// return OUT parameter, true if hit occurs
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
+	// deproject screen position of cross hair to world direction
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
+
 
 
 	UPROPERTY(EditAnywhere)
@@ -33,4 +37,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.33333f;
+
+	float LineTraceRange = 10.f * 1000.f * 100.f;
 };

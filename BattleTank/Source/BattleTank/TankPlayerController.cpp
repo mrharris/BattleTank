@@ -58,6 +58,18 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	// deproject screen position of cross hair to world direction
 	// line trace along that look direction, see what it hits
 	HitLocation = FVector(1.f);
+	FVector LookDirection;
+	if(GetLookDirection(ScreenLocation, LookDirection))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Look Direction is %s"), *LookDirection.ToString());
+	}
+
+
 	return true;
 }
 
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	FVector CameraWorldLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
+}

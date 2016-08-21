@@ -4,17 +4,18 @@
 #include "TankTrack.h"
 #include "TankMovementComponent.h"
 
-void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Tank %s wants to go %s"),
-		*GetOwner()->GetName(),
-		*MoveVelocity.ToString());
-}
-
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
+}
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
+	IntendMoveForward(ForwardThrow);
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)

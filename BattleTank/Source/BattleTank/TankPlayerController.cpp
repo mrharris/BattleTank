@@ -9,14 +9,9 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (ensure(AimingComponent))
-	{
-		FoundAimingComponent(AimingComponent);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Controller can't find Aiming Component at BeginPlay"))
-	}
+	if (!ensure(AimingComponent)) { return; }
+
+	FoundAimingComponent(AimingComponent);
 }
 
 void ATankPlayerController::Tick(float DeltaSeconds)
@@ -57,7 +52,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	if(GetLookDirection(ScreenLocation, LookDirection))
 	{
 		// line trace along that look direction, see what it hits
-		//UE_LOG(LogTemp, Warning, TEXT("Look Direction is %s"), *LookDirection.ToString());
 		bool hit = GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
 

@@ -2,10 +2,10 @@
 
 #include "BattleTank.h"
 #include "TankAimingComponent.h"
-#include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "TankMovementComponent.h"
+#include "Tank.h"
+
 
 // Sets default values
 ATank::ATank()

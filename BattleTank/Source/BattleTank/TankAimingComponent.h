@@ -10,7 +10,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // forward declaration allows us to reference without including
@@ -35,6 +36,9 @@ public:
 
 	EFiringState GetFiringState() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetRoundsLeft() const { return RoundsLeft; }
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
@@ -44,7 +48,6 @@ private:
 	UTankAimingComponent();
 
 	virtual void BeginPlay();
-
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
@@ -67,4 +70,7 @@ private:
 	double LastFireTime = 0;
 
 	FVector AimDirection;
+
+	int RoundsLeft = 3;
+
 };

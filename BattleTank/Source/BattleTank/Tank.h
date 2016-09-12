@@ -14,6 +14,10 @@ public:
 	// called by the engine when apply radial damage
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	// returns current health as a percentage between 0-1
+	UFUNCTION(BlueprintPure, Category = "Health") // like a const (readonly)
+	float GetHealthPercent() const;
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();

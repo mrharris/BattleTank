@@ -40,8 +40,6 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
-
-
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5f;
 

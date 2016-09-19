@@ -30,7 +30,6 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 		// subscribe our local method to tank death event
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
-
 	}
 }
 
@@ -89,7 +88,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 			HitResult,
 			StartLocation,
 			EndLocation,
-			ECC_Visibility))
+			ECC_Camera))
 	{
 		HitLocation = HitResult.Location;
 		return true;
